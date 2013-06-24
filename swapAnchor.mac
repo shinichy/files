@@ -1,0 +1,40 @@
+// 現在のアンカー位置を切り替える
+//
+//	author suplik (http://d.hatena.ne.jp/suplik/20090714/1247582243)
+//
+//	ver 1.0    2009/7/14
+//  ver 1.1    2009/7/15    エディタ式になっていると行がずれる問題を修正
+//----------------------------------------------
+
+#lastSelTopColumn = seltopcolumn;
+#lastSelTopLineno = seltoplineno;
+#lastSelEndColumn = selendcolumn;
+#lastSelEndLineno = selendlineno;
+if (rectselecting) {
+    escape;
+    beginrect;
+    call MoveToLineNo;
+	endsel;
+}
+else if (selecting) {
+    escape;
+	beginsel;
+	call MoveToLineNo;
+	endsel;
+}
+endmacro;
+
+MoveToLineNo:
+    if (column == #lastSelTopColumn && lineno == #lastSelTopLineno) {
+        movetolineno #lastSelEndColumn + 1, #lastSelEndLineno;
+    }
+    else if (column == #lastSelEndColumn && lineno == #lastSelTopLineno) {
+        movetolineno #lastSelTopColumn + 1, #lastSelEndLineno;
+    }
+    else if (column == #lastSelEndColumn && lineno == #lastSelEndLineno) {
+        movetolineno #lastSelTopColumn + 1, #lastSelTopLineno;
+    }
+    else if (column == #lastSelTopColumn && lineno == #lastSelEndLineno) {
+        movetolineno #lastSelEndColumn + 1, #lastSelTopLineno;
+    }
+    return;

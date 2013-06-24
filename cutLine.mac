@@ -1,0 +1,12 @@
+// 行のカットを行う
+//
+//	authour suplik (http://d.hatena.ne.jp/suplik/)
+//
+//	ver 1.0    2009/7/15
+//----------------------------------------------
+
+golinetop2;
+beginsel;
+golineend2;
+right;
+cut;
